@@ -9,6 +9,7 @@ class Pokemon {
     public string? Name { get; set; }
     public string? Type { get; set; }
     public int Level { get; set; }
+    public int Attack { get; set; }
 }
 
 
@@ -20,12 +21,13 @@ class PokemonLINQLab {
     static void Main(){
         // using the sample data to test the main()
         var pokemons = new List<Pokemon> {
-            new Pokemon { Id= 1, Name = "Bulbasaur", Type = "Grass", Level = 15}, 
-            new Pokemon { Id= 2, Name = "Charmander", Type = "Fire", Level = 36 },
-            new Pokemon { Id= 3, Name = "Squirtle", Type = "Water", Level = 10},
-            new Pokemon { Id= 4, Name = "Pikachu", Type = "Electric", Level = 22},
-            new Pokemon { Id= 5, Name = "Eevee", Type = "Normal", Level = 25},
-            new Pokemon { Id= 6, Name = "Blastoise", Type = "Water", Level = 40}
+            new Pokemon { Id = 1, Name = "Bulbasaur", Type = "Grass", Level = 15, Attack = 49}, 
+            new Pokemon { Id = 2, Name = "Charmander", Type = "Fire", Level = 36, Attack = 52 },
+            new Pokemon { Id = 3, Name = "Squirtle", Type = "Water", Level = 10, Attack = 48},
+            new Pokemon { Id = 4, Name = "Pikachu", Type = "Electric", Level = 22, Attack = 55},
+            new Pokemon { Id = 5, Name = "Eevee", Type = "Normal", Level = 25, Attack = 55},
+            new Pokemon { Id = 6, Name = "Blastoise", Type = "Water", Level = 40, Attack = 57},
+            new Pokemon {Id = 7, Name = "Darkrai", Type = "Dark", Level = 45, Attack = 63}
         };
 
         // using the LINQ query to find pokemon that is ready to evolve
@@ -44,12 +46,25 @@ class PokemonLINQLab {
         // finding all water pokemons. 
         var findingAllWater = from p in pokemons
                             where p.Type == "Water"
+                            orderby p.Level descending
                             select p;
 
         Console.WriteLine("Finding all water type pokemons: ");
         foreach (var p in findingAllWater){
             Console.WriteLine($"Name: {p.Name}, Type: {p.Type}, Level: {p.Level}");
         } // end of the second part.       
+
+        var strongPokemon = (from p in pokemons
+                            where p.Attack >= 50
+                            select p).ToList();
+        var sortedPokemon = (from p in pokemons
+                            orderby p.Level 
+                            select p).ToList();
+        Console.WriteLine("Sorting the strongest pokemons by alphabetical order");
+        foreach (var p in sortedPokemon){
+            Console.WriteLine($"Name: {p.Name}, Type: {p.Type}, Attack: {p.Attack}");
+        }// end of the third part. 
+
 
     }// end of the main method 
 } // ending the pokemonLINQ
