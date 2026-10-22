@@ -37,7 +37,7 @@ class PokemonLINQLab {
                             select p;
 
         // now executing the results. 
-        Console.WriteLine("Pokemon ready to evolve: ");
+        Console.WriteLine("\nPokemon ready to evolve: ");
         foreach (var p in readyToEvolve){
             // printing out the name, type and level 
             Console.WriteLine($"Name: {p.Name}, Type: {p.Type}, Level: {p.Level}");
@@ -49,7 +49,7 @@ class PokemonLINQLab {
                             orderby p.Level descending
                             select p;
 
-        Console.WriteLine("Finding all water type pokemons: ");
+        Console.WriteLine("\nFinding all water type pokemons: ");
         foreach (var p in findingAllWater){
             Console.WriteLine($"Name: {p.Name}, Type: {p.Type}, Level: {p.Level}");
         } // end of the second part.       
@@ -58,9 +58,9 @@ class PokemonLINQLab {
                             where p.Attack >= 50
                             select p).ToList();
         var sortedPokemon = (from p in pokemons
-                            orderby p.Level 
+                            orderby p.Level descending
                             select p).ToList();
-        Console.WriteLine("Sorting the strongest pokemons by alphabetical order");
+        Console.WriteLine("\nSorting the strongest pokemons by alphabetical order");
         foreach (var p in sortedPokemon){
             Console.WriteLine($"Name: {p.Name}, Type: {p.Type}, Attack: {p.Attack}");
         }// end of the third part. 
